@@ -163,7 +163,8 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-ALLOWED_HOSTS = ['https://foodiego-qp4q.onrender.com/', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['foodiego-qp4q.onrender.com', 'localhost', '127.0.0.1']
+
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
