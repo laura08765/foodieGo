@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<link rel="stylesheet" href="/static/css/styles.css">
+
+{% block content %}
+<form class="d-flex my-3" method="GET" action="{% url 'buscar' %}">
+    <input class="form-control me-2" type="text" name="q" placeholder="Buscar..." aria-label="Buscar">
+    <button class="btn btn-primary" type="submit">Buscar</button>
+</form>
+
+<header class="bg-primary text-white text-center py-5">
+    <h1>Bienvenido a FoodieGo 🍽️</h1>
+    <img src="/static/imagenes/logo.png" alt="FoodieGo" width="150">
+    <p class="lead">Tu mejor opción para pedidos a domicilio</p>
+</header>
+
+<div class="container mt-4">
+    <div class="row">
+        {% for restaurante in restaurantes %}
+        <div class="col-md-4">
+            <div class="card">
+                <img src="{% static 'imagenes/logo.png' %}" alt="FoodieGo" width="150">
+                <div class="card-body">
+                    <h5 class="card-title">{{ restaurante.nombre }}</h5>
+                    <p class="card-text">{{ restaurante.direccion }}</p>
+                    <a href="{% url 'restaurante_detalle' restaurante.id %}" class="btn btn-success">Ver menú</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <h1 class="mt-5 mb-4">Menú</h1>
+
+    <div class="row">
+        {% for plato in platos %}
+        <div class="col-md-6 mb-4">
+            <div class="card h-100">
+                {% if plato.imagen %}
+                <img src="{{ plato.imagen.url }}" alt="{{ plato.nombre }}" class="card-img-top" style="object-fit: cover; height: 200px;">
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title">{{ plato.nombre }}</h5>
+                    <p class="card-text">{{ plato.descripcion }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <p>No hay platos disponibles en este momento.</p>
+        {% endfor %}
+    </div>
+</div>
+
+{% endblock %}
+
+
+
+
